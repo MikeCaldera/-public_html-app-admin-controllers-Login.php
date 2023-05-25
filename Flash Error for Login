@@ -1,0 +1,29 @@
+public function onLogin()
+{
+    $data = post();
+
+    $this->validate($data, [
+        'username' => ['required'],
+        'password' => ['required', 'min:6'],
+    ], [], [
+        'username' => lang('admin::lang.login.label_username'),
+        'password' => lang('admin::lang.login.label_password'),
+    ]);
+
+    $credentials = [
+        'username' => array_get($data, 'username'),
+        'password' => array_get($data, 'password'),
+    ];
+
+    if (!AdminAuth::authenticate($credentials, true, true)) {
+        flash()->error('Invalid username or password. Please try again.');
+        return $this->redirectBack();
+    }
+
+    session()->regenerate();
+
+    if ($redirectUrl = input('redirect'))
+        return $this->redirect($redirectUrl);
+
+    return $this->redirectIntended('dashboard');
+}
