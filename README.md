@@ -8,3 +8,6 @@ In this example, an error flash message is added using flash()->error() when the
 Make sure to replace 'admin::lang.login.alert_failed_login' with the appropriate key from your language file that represents the error message you want to display.
 
 With this modification, when the authentication fails, the user will see the error message on the login page indicating that the login attempt was unsuccessful.
+
+
+*** requires this file to be updated /vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php see throttlerequests
